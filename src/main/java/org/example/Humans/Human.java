@@ -21,9 +21,17 @@ public class Human {
     private int iq;
     private Family family;
     private Map<String,String> schedule = new HashMap<String,String>();
-    LocalDate localDate = Instant.ofEpochMilli(birthDate).atZone(ZoneId.systemDefault()).toLocalDate();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    String formattedBirthDate = localDate.format(formatter);
+
+    public String getFormattedBirthDate() {
+        // Преобразование long в объект LocalDate
+        LocalDate date = Instant.ofEpochMilli(this.birthDate)
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+
+        // Форматирование даты в строку
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return date.format(outputFormatter);
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -155,7 +163,7 @@ public class Human {
         return  getClass().getSimpleName() + "{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", BirthDay=" + formattedBirthDate +
+                ", BirthDay=" + getFormattedBirthDate() +
                 ", iq=" + iq +
                 ", schedule=" + schedule.toString() +
                 '}';
@@ -164,7 +172,7 @@ public class Human {
         StringBuilder builder = new StringBuilder();
         builder.append("name='").append(name).append("\'");
         builder.append(", surname='").append(surname).append("\'");
-        builder.append(", BirthDay=").append(formattedBirthDate);
+        builder.append(", BirthDay=").append(getFormattedBirthDate());
         builder.append( ", iq=").append(iq);
         builder.append(", schedule=").append(schedule.toString()).append("}");
         return builder.toString();

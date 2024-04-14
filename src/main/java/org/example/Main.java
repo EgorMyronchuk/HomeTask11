@@ -36,6 +36,7 @@ public class Main {
                         familyController.getFamilyById(0).addChild(child1);
                         Man father2 = new Man("Evgen", "Brazilia", "01/10/2004", 12);
                         Woman mother2 = new Woman("Lena", "Kyky", "02/10/2004", 15);
+                        System.out.println(mother2.prettyFormat());
                         familyController.createNewFamily(mother2, father2);
                     }
                     break;
